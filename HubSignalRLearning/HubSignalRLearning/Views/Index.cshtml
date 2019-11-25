@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Connect to chat";
+}
+
+<h1>Enter your username</h1>
+<form asp-controller="Home" asp-action="ConnectToChat" method="post">
+    <label asp-for="username"></label>
+    <input asp-for="username" />
+    <input type="submit" value="Connect" />
+</form>
