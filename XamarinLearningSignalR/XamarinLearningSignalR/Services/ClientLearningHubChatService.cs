@@ -52,6 +52,18 @@ namespace XamarinLearningSignalR.Services
             await hubConnection.InvokeAsync("SendMessage", user, message);
         }
 
+        public async Task SendDraw(string username, byte[] drawAsByteArray)
+        {
+            await hubConnection.InvokeAsync("SendDraw", username, drawAsByteArray);
+        }
+
+        public void ReceiveDraw(Action<String, byte[]> receiveDrawCallBack)
+        {
+            hubConnection.On<String, byte[]>("NewDraw", (username, drawAsByteArray) => {
+                receiveDrawCallBack.Invoke(username, drawAsByteArray);
+            });
+        }
+
         public void ReceiveMessage(Action<String, String> receiveMessageCallBack)
         {
             hubConnection.On<String, String>("SomethingAwesome", (username, message) => {

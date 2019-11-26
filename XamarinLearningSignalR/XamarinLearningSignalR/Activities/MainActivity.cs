@@ -19,22 +19,42 @@ namespace XamarinLearningSignalR.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
 
-            ConnectButton.Click += ConnectButton_Click;
+            ConnectToChatButton.Click += ConnectToChatButton_Click;
+            ConnectToDrawButton.Click += ConnectToDrawButton_Click;
         }
 
-        private void ConnectButton_Click(object sender, EventArgs e)
+        private bool ValidateUsername(string username)
         {
-            string username = UserNameTextView.Text;
             if(String.IsNullOrEmpty(username))
             {
                 Toast.MakeText(this, "Please provide a username", ToastLength.Short).Show();
-            } else
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ConnectToChatButton_Click(object sender, EventArgs e)
+        {
+            string username = UserNameTextView.Text;
+            if(ValidateUsername(username))
             {
                 Intent chatActivityIntent = new Intent(this, typeof(ChatActivity));
                 chatActivityIntent.PutExtra("usernameValue", username);
                 StartActivity(chatActivityIntent);
             }
         }
-	}
+
+        private void ConnectToDrawButton_Click(object sender, EventArgs e)
+        {
+            string username = UserNameTextView.Text;
+            if (ValidateUsername(username))
+            {
+                Intent drawChatActivityIntent = new Intent(this, typeof(DrawChatActivity));
+                drawChatActivityIntent.PutExtra("usernameValue", username);
+                StartActivity(drawChatActivityIntent);
+            }
+        }
+    }
 }
 

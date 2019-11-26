@@ -24,13 +24,23 @@ namespace XamarinLearningSignalR.Activities
             }
         }
 
-        private Button connectButton;
-        public Button ConnectButton
+        private Button connectToChatButton;
+        public Button ConnectToChatButton
         {
             get
             {
-                return connectButton
-                    ?? (connectButton = FindViewById<Button>(Resource.Id.connectButton));
+                return connectToChatButton
+                    ?? (connectToChatButton = FindViewById<Button>(Resource.Id.connectToChatButton));
+            }
+        }
+
+        private Button connectToDrawButton;
+        public Button ConnectToDrawButton
+        {
+            get
+            {
+                return connectToDrawButton
+                    ?? (connectToDrawButton = FindViewById<Button>(Resource.Id.connectToDrawButton));
             }
         }
     }

@@ -13,5 +13,9 @@ namespace HubSignalRLearning.Services
             await Clients.All.SendAsync("SomethingAwesome", user, message);
         }
 
+        public async Task SendDraw(string username, byte[] drawObjectAsByteArray)
+        {
+            await Clients.All.SendAsync("NewDraw", username, drawObjectAsByteArray);
+        }
     }
 }
