@@ -48,8 +48,11 @@ namespace XamarinLearningSignalR.Activities
         {
             return (username, drawAsByteArray) =>
             {
-                List<DrawPath> receivedDraw = SerializablesHelper.FromByteArray<List<DrawPath>>(drawAsByteArray);
-                DrawCanvasWidget.MakeNewDraw(receivedDraw);
+                if(username != ourUsername)
+                {
+                    List<DrawPath> receivedDraw = SerializablesHelper.FromByteArray<List<DrawPath>>(drawAsByteArray);
+                    DrawCanvasWidget.MakeNewDraw(receivedDraw);
+                }
             };
         }
 
@@ -62,7 +65,10 @@ namespace XamarinLearningSignalR.Activities
 
         private async void ConnectToChatHub()
         {
-            await learningHubChatService.Connect();
+            if (!learningHubChatService.IsConnected)
+            {
+                await learningHubChatService.Connect();
+            }
         }
     }
 }

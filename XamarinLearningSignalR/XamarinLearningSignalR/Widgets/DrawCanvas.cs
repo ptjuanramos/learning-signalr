@@ -18,21 +18,14 @@ namespace XamarinLearningSignalR.Widgets
     public class DrawCanvas : View
     {
         private Paint mPaint;
-        private Paint mBitmapPaint = new Paint(PaintFlags.Dither);
-        private SerializablePath mPath;
-        private List<DrawPath> drawPaths = new List<DrawPath>();
-        private int currentColor = Color.Black.ToArgb();
+        private readonly Paint mBitmapPaint = new Paint(PaintFlags.Dither);
+        private SerializablePath serializablePath;
+        private readonly int currentColor = Color.Black.ToArgb();
         private float mX, mY;
         private Bitmap mBitmap;
         private Canvas mCanvas;
 
-        public List<DrawPath> DrawPaths
-        {
-            get
-            {
-                return drawPaths;
-            }
-        }
+        public List<DrawPath> DrawPaths = new List<DrawPath>();
 
         public DrawCanvas(Context context, IAttributeSet attrs, int defStyle) :
             base(context, attrs, defStyle)
@@ -61,12 +54,11 @@ namespace XamarinLearningSignalR.Widgets
 
         private void TouchStart(float x, float y)
         {
-            mPath = new SerializablePath();
-            DrawPath newDrawPath = new DrawPath(currentColor, mPath);
-            drawPaths.Add(newDrawPath);
+            serializablePath = new SerializablePath();
+            DrawPath newDrawPath = new DrawPath(currentColor, serializablePath);
+            DrawPaths.Add(newDrawPath);
 
-            mPath.Reset();
-            mPath.MoveTo(x, y);
+            serializablePath.MoveToPoint = new Models.Point(x, y);
 
             mX = x;
             mY = y;
@@ -79,7 +71,10 @@ namespace XamarinLearningSignalR.Widgets
 
             if (dx >= 4 || dy >= 4)
             {
-                mPath.QuadTo(x, y, (x + mX) / 2, (y + mY) / 2);
+                Models.Point point1 = new Models.Point(x, y);
+                Models.Point point2 = new Models.Point((x + mX) / 2, (y + mY) / 2);
+                serializablePath.QuadTo(point1, point2);
+
                 mX = x;
                 mY = y;
             }
@@ -87,7 +82,7 @@ namespace XamarinLearningSignalR.Widgets
 
         private void TouchUp()
         {
-            mPath.LineTo(mX, mY);
+            serializablePath.LineToPoint = new Models.Point(mX, mY);
         }
 
         public override bool OnTouchEvent(MotionEvent e)
@@ -116,13 +111,13 @@ namespace XamarinLearningSignalR.Widgets
 
         public void ClearDraw()
         {
-            drawPaths.Clear();
+            DrawPaths.Clear();
             Invalidate();
         }
 
         private void DrawOnCanvas(Canvas canvas)
         {
-            foreach (DrawPath drawPath in drawPaths)
+            foreach (DrawPath drawPath in DrawPaths)
             {
                 mPaint.Color = new Color(drawPath.Color);
                 mPaint.StrokeWidth = 20;
@@ -133,8 +128,10 @@ namespace XamarinLearningSignalR.Widgets
                 mPaint.SetMaskFilter(null);
                 mPaint.AntiAlias = true;
                 mPaint.SetXfermode(null);
-                mCanvas.DrawPath(drawPath.Path, mPaint);
 
+                Path pathToDraw = drawPath.Path.AndroidGraphicsPath;
+                mCanvas.DrawPath(pathToDraw, mPaint);
+                
                 canvas.DrawBitmap(mBitmap, 0, 0, mBitmapPaint);
             }
         }
@@ -142,7 +139,7 @@ namespace XamarinLearningSignalR.Widgets
         public void MakeNewDraw(List<DrawPath> newDrawPaths)
         {
             ClearDraw();
-            drawPaths = newDrawPaths;
+            DrawPaths = newDrawPaths;
             Invalidate();
         }
 

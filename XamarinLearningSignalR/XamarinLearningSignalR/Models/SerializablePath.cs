@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 using Android.App;
@@ -10,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 
 namespace XamarinLearningSignalR.Models
 {
@@ -43,10 +45,36 @@ namespace XamarinLearningSignalR.Models
     }
     #endregion
 
-    #region serializable Android.Graphics.Path
+    #region quadratic curve
+    [Serializable]
+    public class QuadraticCurve
+    {
+        private List<Tuple<Point, Point>> quadraticPoints;
+        public List<Tuple<Point, Point>> QuadraticPoints
+        {
+            get
+            {
+                return quadraticPoints ?? (quadraticPoints = new List<Tuple<Point, Point>>()) ;
+            }
+        }
+    }
+    #endregion
+
+    #region serializable wrapper of Android.Graphics.Path
     [Serializable]
     public class SerializablePath
     {
+
+        [NonSerialized]
+        private Path path;
+        public Path AndroidGraphicsPath
+        {
+            get
+            {
+                return path ?? (path = BuildPathFromSerializablePath());
+            }
+        }
+
         private Point lineToPoint;
         public Point LineToPoint
         {
@@ -54,77 +82,63 @@ namespace XamarinLearningSignalR.Models
             {
                 return lineToPoint;
             }
+
+            set
+            {
+                lineToPoint = value;
+                path.LineTo(value.X, value.Y);
+            }
         }
 
         private Point moveToPoint;
         public Point MoveToPoint
         {
-            get
+            get 
             {
                 return moveToPoint;
             }
-        }
 
-        private Tuple<Point, Point> quadraticPoint;
-        public Tuple<Point, Point> QuadraticPoint
-        {
-            get
+            set
             {
-                return quadraticPoint;
+                moveToPoint = value;
+                path.MoveTo(value.X, value.Y);
             }
         }
 
-        [NonSerialized]
-        private Path nonSerializedPath;
-        public Path Path
+        private QuadraticCurve quadraticCurve;
+        public QuadraticCurve QuadraticCurve
         {
             get
             {
-                return nonSerializedPath ?? (nonSerializedPath = BuildPath());
-
+                return quadraticCurve ?? (quadraticCurve = new QuadraticCurve());
             }
         }
 
-        private Path BuildPath()
+        public SerializablePath()
         {
-
-            return null;
+            path = new Path();
         }
 
-        //public override void LineTo(float x, float y)
-        //{
-        //    lineToPoint = new Point(x, y);
-        //    base.LineTo(x, y);
-        //}
+        public void QuadTo(Point firstPoint, Point secondPoint)
+        {
+            QuadraticCurve.QuadraticPoints.Add(new Tuple<Point, Point>(firstPoint, secondPoint));
+            path.QuadTo(firstPoint.X, firstPoint.Y, secondPoint.X, secondPoint.Y);
+        }
 
-        //public void LineTo(Point lineToPoint)
-        //{
-        //    base.LineTo(lineToPoint.X, lineToPoint.Y);
-        //}
+        private Path BuildPathFromSerializablePath()
+        {
+            Path newPath = new Path();
+            newPath.MoveTo(MoveToPoint.X, MoveToPoint.Y);
+            foreach(Tuple<Point, Point> quadraticPoint in QuadraticCurve.QuadraticPoints)
+            {
+                Point firstQuadPoint = quadraticPoint.Item1;
+                Point secondQuadPoint = quadraticPoint.Item2;
+                newPath.QuadTo(firstQuadPoint.X, firstQuadPoint.Y, secondQuadPoint.X, secondQuadPoint.Y);
+            }
+            newPath.LineTo(LineToPoint.X, LineToPoint.Y);
 
-        //public override void MoveTo(float x, float y)
-        //{
-        //    moveToPoint = new Point(x, y);
-        //    base.MoveTo(x, y);
-        //}
-
-        //public void MoveTo(Point moveToPoint)
-        //{
-        //    base.MoveTo(moveToPoint.X, moveToPoint.Y);
-        //}
-
-        //public override void QuadTo(float x1, float y1, float x2, float y2)
-        //{
-        //    quadraticPoint = new Tuple<Point, Point>(new Point(x1, y1), new Point(x2, y2));
-        //    base.QuadTo(x1, y1, x2, y2);
-        //}
-
-        //public void QuadTo(Tuple<Point, Point> quadToPoints)
-        //{
-        //    Point point1 = quadToPoints.Item1;
-        //    Point point2 = quadToPoints.Item2;
-        //    base.QuadTo(point1.X, point1.Y, point2.X, point2.Y);
-        //}
+            return newPath;
+        }
     }
     #endregion
 }

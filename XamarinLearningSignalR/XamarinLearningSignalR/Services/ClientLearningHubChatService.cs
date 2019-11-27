@@ -29,6 +29,14 @@ namespace XamarinLearningSignalR.Services
             }
         }
 
+        public bool IsConnected
+        {
+            get
+            {
+                return hubConnection.State == HubConnectionState.Connected;
+            }
+        }
+
         private readonly HubConnection hubConnection;
         private ClientLearningHubChatService()
         {
