@@ -48,12 +48,18 @@ namespace XamarinLearningSignalR.Activities
         {
             return (username, drawAsByteArray) =>
             {
-                if(username != ourUsername)
+                ChangeLastDrawAuthor(username);
+                if (username != ourUsername)
                 {
                     List<DrawPath> receivedDraw = SerializablesHelper.FromByteArray<List<DrawPath>>(drawAsByteArray);
                     DrawCanvasWidget.MakeNewDraw(receivedDraw);
                 }
             };
+        }
+
+        private void ChangeLastDrawAuthor(string username)
+        {
+            LastDrawUser.Text = $"Last draw by {username}";
         }
 
         private void PrepareCanvas()

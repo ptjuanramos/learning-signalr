@@ -16,6 +16,14 @@ namespace XamarinLearningSignalR.Activities
     public partial class DrawChatActivity
     {
 
+        private TextView lastDrawUser;
+        public TextView LastDrawUser { 
+            get
+            {
+                return lastDrawUser ?? (lastDrawUser = FindViewById<TextView>(Resource.Id.lastUsernameDraw));
+            } 
+        }
+
         private DrawCanvas drawCanvasWidget;
         public DrawCanvas DrawCanvasWidget
         {
