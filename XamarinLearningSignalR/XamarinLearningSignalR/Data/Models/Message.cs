@@ -19,7 +19,7 @@ namespace XamarinLearningSignalR.Data.Models
         [PrimaryKey, AutoIncrement, Column("id")]
         public Guid Id{ get; set; }
 
-        //[Column("channel_id"), NotNull, Unique]
+        //[Column("channel_id"), NotNull, Unique, Indexed]
         //public string ChannelId { get; set; }
 
         [Column("from_user"), NotNull]
@@ -30,6 +30,9 @@ namespace XamarinLearningSignalR.Data.Models
 
         [Column("message_type"), NotNull]
         public MessageType MessageType { get; set; }
+
+        //[Column("date_time"), Default(value: null)]
+        //public DateTime MessageDateTime { get; set; }
 
         public byte[] data { get; set; }
     }

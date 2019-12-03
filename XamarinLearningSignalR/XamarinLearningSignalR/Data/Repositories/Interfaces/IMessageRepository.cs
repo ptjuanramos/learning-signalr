@@ -9,6 +9,6 @@ namespace XamarinLearningSignalR.Data.Repositories.Interfaces
         int Update(Message message);
         int Delete(Message message);
         List<Message> GetAll();
-        List<Message> GetChannelMessages(string channel);
+        //List<Message> GetChannelMessages(string channel);
     }
 }

@@ -15,13 +15,28 @@ namespace XamarinLearningSignalR.Data.Repositories
             sqlLiteConnection = new SQLiteConnection(DataConstants.SQL_LITE_DB_PATH);
         }
 
-        public int Delete(Message message) => sqlLiteConnection.Delete<Message>(message);
+        public int Delete(Message message)
+        {
+            sqlLiteConnection.CreateTable<Message>();
+            return sqlLiteConnection.Delete<Message>(message);
+        }
 
-        public int Insert(Message message) => sqlLiteConnection.Insert(message);
+        public int Insert(Message message) {
+            sqlLiteConnection.CreateTable<Message>();
+            return sqlLiteConnection.Insert(message);
+        }
 
-        public int Update(Message message) => sqlLiteConnection.Update(message);
+        public int Update(Message message)
+        {
+            sqlLiteConnection.CreateTable<Message>();
+            return sqlLiteConnection.Update(message);
+        }
 
-        public List<Message> GetAll() => sqlLiteConnection.Table<Message>().ToList();
+        public List<Message> GetAll()
+        {
+            sqlLiteConnection.CreateTable<Message>();
+            return sqlLiteConnection.Table<Message>().ToList();
+        }
 
         //public List<Message> GetChannelMessages(string channelId) => sqlLiteConnection.Table<Message>().Where(m => m.ChannelId.Equals(channelId)).ToList();
 
