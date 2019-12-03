@@ -12,9 +12,8 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using Learning.Core.Services;
 using XamarinLearningSignalR.Adapters;
-using XamarinLearningSignalR.Services;
-
 namespace XamarinLearningSignalR.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]

@@ -10,9 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace XamarinLearningSignalR.Models
+namespace XamarinLearningSignalR.ViewModels
 {
-    public class ChatMessage : ServiceMessage<String>
+    public class BaseViewModel
     {
     }
 }

@@ -10,9 +10,9 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Learning.Core.Services;
 using XamarinLearningSignalR.Helpers;
 using XamarinLearningSignalR.Models;
-using XamarinLearningSignalR.Services;
 
 namespace XamarinLearningSignalR.Activities
 {

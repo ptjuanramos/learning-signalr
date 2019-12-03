@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Learning.Core.Models;
+using Learning.Core.Services.Interfaces;
+using System;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using XamarinLearningSignalR.Models;
-using XamarinLearningSignalR.Services.Interfaces;
 
-namespace XamarinLearningSignalR.Services
+namespace Learning.Core.Services
 {
     public class DrawMessageService : IMessageService<DrawMessage>
     {

@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Learning.Core": {
+      "commandName": "Executable"
+    }
+  }
+}

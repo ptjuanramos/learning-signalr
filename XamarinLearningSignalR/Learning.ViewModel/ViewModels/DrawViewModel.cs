@@ -10,12 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace XamarinLearningSignalR.Models
+namespace XamarinLearningSignalR.ViewModels
 {
-    public class ServiceMessage<T>
+    public class DrawViewModel : BaseViewModel 
     {
-        public string FromUser { get; set; }
-        public string ToUser{ get; set; }
-        public T Content { get; set; }
     }
 }

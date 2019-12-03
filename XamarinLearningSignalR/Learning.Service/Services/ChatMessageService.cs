@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Learning.Core.Models;
+using Learning.Core.Services.Interfaces;
+using System;
 using System.Threading.Tasks;
-using XamarinLearningSignalR.Models;
-using XamarinLearningSignalR.Services.Interfaces;
 
-namespace XamarinLearningSignalR.Services
+namespace Learning.Core.Services
 {
     public class ChatMessageService : IMessageService<ChatMessage>
     {
