@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning.ViewModel", "Learn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning.Data", "Learning.Data\Learning.Data.csproj", "{4FAB03D8-0B4B-4DBD-8269-24409B51C0E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning.Service", "Learning.Service\Learning.Service.csproj", "{F3AE1FDD-92F7-4474-A888-53C5A961968C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning.Core", "Learning.Core\Learning.Core.csproj", "{F3AE1FDD-92F7-4474-A888-53C5A961968C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

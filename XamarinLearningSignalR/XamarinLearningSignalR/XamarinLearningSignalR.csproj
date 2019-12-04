@@ -76,11 +76,6 @@
       <DependentUpon>MainActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Adapters\ChatListAdapter.cs" />
-    <Compile Include="Data\DataConstants.cs" />
-    <Compile Include="Data\Models\Message.cs" />
-    <Compile Include="Data\Models\MessageType.cs" />
-    <Compile Include="Data\Repositories\Interfaces\IMessageRepository.cs" />
-    <Compile Include="Data\Repositories\MessageRepository.cs" />
     <Compile Include="Helpers\SerializablesHelper.cs" />
     <Compile Include="Models\DrawPath.cs" />
     <Compile Include="Models\SerializablePath.cs" />
@@ -89,7 +84,6 @@
     <Compile Include="Models\Tools\Pencil.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ClientLearningHubChatService.cs" />
     <Compile Include="Widgets\DrawCanvas.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +151,12 @@
     <AndroidResource Include="Resources\layout\activity_draw_main.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Learning.Service\Learning.Core.csproj">
+      <Project>{F3AE1FDD-92F7-4474-A888-53C5A961968C}</Project>
+      <Name>Learning.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

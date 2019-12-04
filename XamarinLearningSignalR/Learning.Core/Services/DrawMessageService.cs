@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Learning.Core.Services
 {
-    public class DrawMessageService : IMessageService<DrawMessage>
+    public class DrawMessageService : IDrawMessageService
     {
         private readonly ClientLearningHubChatService clientLearningHubChatService;
         public DrawMessageService(ClientLearningHubChatService clientLearningHubChatService)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Learning.Core.Services
 {
-    public class ChatMessageService : IMessageService<ChatMessage>
+    public class ChatMessageService : IChatMessageService
     {
         private readonly ClientLearningHubChatService clientLearningHubChatService;
 

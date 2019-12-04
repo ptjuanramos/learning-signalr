@@ -10,9 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace XamarinLearningSignalR.ViewModels
+namespace XamarinLearningSignalR
 {
-    public class BaseViewModel
+    public class MyCustomApp : Application
     {
     }
 }
