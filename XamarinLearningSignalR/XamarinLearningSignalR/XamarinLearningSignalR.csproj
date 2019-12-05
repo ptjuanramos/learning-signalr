@@ -82,6 +82,7 @@
     <Compile Include="Models\Tools\ColorPicker.cs" />
     <Compile Include="Models\Tools\Eraser.cs" />
     <Compile Include="Models\Tools\Pencil.cs" />
+    <Compile Include="MyCustomApp.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Widgets\DrawCanvas.cs" />

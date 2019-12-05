@@ -1,9 +1,11 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using Learning.Core.Services;
 using Learning.Core.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using XamarinLearningSignalR.ViewModels;
 
 namespace Learning.Core.Configurations
 {
@@ -18,7 +20,8 @@ namespace Learning.Core.Configurations
 
         public void RegisterViewModels()
         {
-
+            SimpleIoc.Default.Register<ChatViewModel>();
+            SimpleIoc.Default.Register<DrawViewModel>();
         }
     }
 }
